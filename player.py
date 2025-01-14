@@ -9,7 +9,7 @@ class behavior:
         self.y = y
         self.w = w
         self.h = h
-        self.speed = 10
+        self.speed = 2
 
     def draw(self, window):
         window.blit(self.image, (self.rect.x, self.rect.y))
@@ -44,9 +44,7 @@ class ENEMY(behavior):
     def draw(self, window):
         window.blit(self.image, (self.rect.x, self.rect.y))
 
-
-
 player_img = pygame.image.load('ork.png')
 enemy_img = pygame.image.load('knight.png')
-player = PLAYER(0, 400, 45, 54, 5, player_img)
+player = PLAYER(0, 400, 30, 37, 5, player_img)
 enemy = ENEMY(500, 0, 45, 54, enemy_img)

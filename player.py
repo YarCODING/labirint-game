@@ -19,10 +19,6 @@ class PLAYER(behavior):
         super().__init__(x, y, w, h, image)
         self.speed = speed
 
-
-    def draw(self, window):
-        window.blit(self.image, (self.rect.x, self.rect.y))
-
     def move(self, size):
         keys = pygame.key.get_pressed()
 

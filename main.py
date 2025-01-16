@@ -30,6 +30,7 @@ winmusic = pygame.mixer.Sound('win_music.mp3')
 
 blocks, money = make_map(lvl1)
 
+
 font = pygame.font.SysFont('Arial', 40, True)
 font_small = pygame.font.SysFont('Arial', 20)
 lose = font.render('You lose!', True, (255, 0, 0))

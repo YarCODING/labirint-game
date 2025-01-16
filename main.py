@@ -2,6 +2,10 @@ import pygame
 from player import*
 from maps import*
 
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+# сделать ещё одну карту которая будет ставиться при нажатии кнопки (каждая карта не проходима по отдельности)
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 pygame.init()
 
 size = (600, 500)
@@ -16,8 +20,13 @@ bg = pygame.transform.scale(bg, size)
 
 
 pygame.mixer.music.load('music.ogg')
-pygame.mixer.music.set_volume(0.05)
+pygame.mixer.music.set_volume(0.4)
 pygame.mixer.music.play(-1)
+
+losemusic = pygame.mixer.Sound("lose_music.mp3")
+losemusic.set_volume(0.4)
+winmusic = pygame.mixer.Sound('win_music.mp3')
+
 
 blocks, money = make_map(lvl1)
 
@@ -51,10 +60,13 @@ while game:
             if player.rect.colliderect(b.rect):
                 finish = True
                 pygame.mixer.music.stop()
+                losemusic.play(-1)
                 window.blit(lose, (210, 250))
                 window.blit(continui, (140, 300))
 
         if player.rect.colliderect(money.rect):
+            pygame.mixer.music.stop()
+            winmusic.play(-1)
             finish = True
             window.blit(win, (210, 250))
 
@@ -66,6 +78,8 @@ while game:
         if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE and finish == True:
             finish = False
             player = PLAYER(0, 400, 30, 37, 5, player_img)
+            winmusic.stop()
+            losemusic.stop()
             pygame.mixer.music.play()
 
 

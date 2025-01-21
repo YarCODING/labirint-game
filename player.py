@@ -1,6 +1,6 @@
 import pygame
 
-class behavior:
+class sprite:
     def __init__(self, x:int, y:int, w:int, h:int, image):
         self.rect = pygame.Rect(x, y, w, h)
         self.image = image
@@ -14,7 +14,7 @@ class behavior:
     def draw(self, window):
         window.blit(self.image, (self.rect.x, self.rect.y))
 
-class PLAYER(behavior):
+class PLAYER(sprite):
     def __init__(self, x, y, w, h, speed, image):
         super().__init__(x, y, w, h, image)
         self.speed = speed
@@ -31,20 +31,25 @@ class PLAYER(behavior):
         if keys[pygame.K_s] and self.rect.y < size[1] - self.h:
             self.rect.y += self.speed
     
-class ENEMY(behavior):
-    def __init__(self, x, y, w, h, image):
+class ENEMY(sprite):
+    def __init__(self, x, y, w, h, image, speed, x2):
         super().__init__(x, y, w, h, image)
-        self.aggresion = 1
-        self.speed = 5 * self.aggresion
 
-    def move(self, size):
-        pass
+        self.speed = speed
+        self.x2 = x2
+
+    def move(self):
+        if self.rect.x <= self.x2:
+            self.rect.x += self.speed
+        else:
+            self.rect.x = -50
         
 
     def draw(self, window):
         window.blit(self.image, (self.rect.x, self.rect.y))
 
+
 player_img = pygame.image.load('ork.png')
 enemy_img = pygame.image.load('knight.png')
 player = PLAYER(0, 400, 30, 37, 5, player_img)
-enemy = ENEMY(500, 0, 45, 54, enemy_img)
+enemy = ENEMY(0, 52, 38, 47, enemy_img, 5, 650)

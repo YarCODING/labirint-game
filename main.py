@@ -51,7 +51,7 @@ while game:
         player.move(size)
         player.draw(window)
 
-        enemy.move(size)
+        enemy.move()
         enemy.draw(window)
 
         for block in blocks:

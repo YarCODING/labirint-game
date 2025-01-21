@@ -1,11 +1,11 @@
-from player import behavior
+from player import sprite
 import pygame, random
 
 lvl1 = ['001111000000000000000000',
         '001001111111111111000000',
         '000000000000000000000000',
         '000000000000000000000000',
-        '001001111111111111110011',
+        '001001111111111111110001',
         '001000000001000001000000',
         '001000000001000001000000',
         '001001111111110001000000',
@@ -13,11 +13,11 @@ lvl1 = ['001111000000000000000000',
         '001000000000000010001000',
         '001111111111100010001030',
         '001000000000100010001000',
-        '001000000000100110001000',
+        '001000000000100010001000',
         '111111111100100010000000',
         '000000000000100010000000',
         '000000000000100011001111',
-        '000000100000100010000000',
+        '000000100000000010000000',
         '000000100000000010000200',
         '111100100000000010000000',
         '000000111111111110000000',
@@ -42,9 +42,9 @@ def make_map(lvl:list):
     for row in lvl:
         for tile in row:       
             if tile == '1':
-                blocks.append(behavior(block_x, block_y, block_size, block_size, block_img))
+                blocks.append(sprite(block_x, block_y, block_size, block_size, block_img))
             elif tile == '2':
-                money = behavior(block_x, block_y, block_size*2 ,block_size*2, img_money)
+                money = sprite(block_x, block_y, block_size*2 ,block_size*2, img_money)
             block_x += block_size
         block_x = 0
         block_y += block_size

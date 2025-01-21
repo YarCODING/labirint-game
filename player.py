@@ -19,6 +19,8 @@ class PLAYER(sprite):
         super().__init__(x, y, w, h, image)
         self.speed = speed
 
+        self.direction = 'right'
+
     def move(self, size):
         keys = pygame.key.get_pressed()
 
@@ -32,17 +34,31 @@ class PLAYER(sprite):
             self.rect.y += self.speed
     
 class ENEMY(sprite):
-    def __init__(self, x, y, w, h, image, speed, x2):
-        super().__init__(x, y, w, h, image)
-
+    def __init__(self, x, y, w, h, image_right, speed, x2, direction = 'right'):
+        super().__init__(x, y, w, h, image_right)
+        self.image_left =  pygame.transform.scale(pygame.transform.flip(image_right, True, False), (w, h))
+        self.image_right = pygame.transform.scale(image_right, (w, h))
+        self.image = self.image_right
         self.speed = speed
+        self.x1 = x
         self.x2 = x2
 
+        self.direction = direction
+
     def move(self):
-        if self.rect.x <= self.x2:
+        if self.rect.x >= self.x2:
+            self.rect.x = self.x2
+            self.direction = 'left'
+            self.image = self.image_left
+        elif self.rect.x <= self.x1:
+            self.rect.x = self.x1
+            self.direction = 'right'
+            self.image = self.image_right
+        
+        if self.direction == 'right':
             self.rect.x += self.speed
         else:
-            self.rect.x = -50
+            self.rect.x -= self.speed
         
 
     def draw(self, window):
